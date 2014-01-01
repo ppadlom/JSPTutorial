@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <style>
+      body {
+        font-family: "Open Sans", Menlo;
+      }
+      h4 {
+        color: #FD8F8F;
+      }
+      b {
+        color: #FD8F8F;
+        font-size: 1.1em;
+      }
+      .big {
+        font-size: 3em;
+      }
+      #fields-toggle {
+        cursor: pointer;
+      }
+      #methods-toggle {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="big">Eat Krispy Cream Saturday di</div>
+    <h1>TODO List for Padlom from lecturer's example</h1>
+    <h3>Model</h3>
+    <ol>
+      <li>Create <b>DB_URL</b>, <b>DB_USER</b>, <b>DB_PASSWORD</b> constants to help you connect with database.</li>
+      <li>Create <b>Customer class</b></li>
+      <p><div id="fields-toggle">With following fields...</div>
+        <ul id="fields-data">
+          <li><b>addressLine1</b></li>
+          <li><b>addressLine2</b></li>
+          <li><b>city</b></li>
+          <li><b>creditLimit</b></li>
+          <li><b>customerId</b></li>
+          <li><b>discountCode</b></li>
+          <li><b>email</b></li>
+          <li><b>fax</b></li>
+          <li><b>name</b></li>
+          <li><b>phone</b></li>
+          <li><b>state</b></li>
+          <li><b>zip</b></li>
+        </ul>
+        <br />
+        <div id="methods-toggle">And these methods...</div>
+        <ul id="methods-data">
+          <li><b>find(String searchKey)</b> - returns List&lt;Customer&gt;</li>
+          <li><b>findById(int id)</b> - returns List&lt;Customer&gt;</li>
+          <li><b>getters and setters</b> from above fields</li>
+          <li><b>save(boolean isNewCustomer)</b> - used for create or update <b>Customer</b> use <b>isNewCustomer</b> as a flag</li>
+          <li><b>toObject(ResultSet rs, Customer tmp)</b> - convert <b>ResultSet</b> type to <b>Customer</b> type</li>
+          <li><b>toString()</b></li>
+          <li><b>update(boolean isNewCustomer)</b> - make changes to the specified <b>Customer</b></li>
+        </ul>
+      </p>
+
+    </ol>
+
+    <h3>View</h3>
+    <ol>
+      <li><b>index.jsp</b> - create some form to enter a <b>search key</b> then display list of customers when form is submitted and link to <b>new_customer.jsp</b> </li>
+      <li><b>new_customer.jsp</b> - create form to enter new customer info.</li>
+      <li><b>customer_form.jsp</b> - create form similar to <b>new_customer.jsp</b> (for view the specific customer)</li>
+    </ol>
+
+    <h3>Controller</h3>
+    <ol>
+      <li><h4>General</h4></li>
+      <ul>
+        <li>Don't forget to <b>getServletContext().getRequestDispatcher("index.jsp").forward(request, response);</b></li>
+        <li>Use <b>doGet()</b> for display data.</li>
+        <li>Use <b>doPost()</b> for create, update, or search data.</li>
+      </ul>
+      <li>
+        <h4>CustomerListServlet.java</h4>
+        <ul>
+          <li>Handle <b>searchKey</b> from <b>index.jsp</b> use <b>request.getParameter("searchKey");</b></li>
+          <li>Check if <b>serachKey</b> is null or not.</li>
+          <li>Handle error message <b>trim().length()</b> remember?</li>
+          <li>Set attribute "customers" <b>request.setAttribute("customers")</b> that retrieved from <b>Customer.find(searchKey)</b></li>
+          <li>Don't forget to <b>getServletContext().getRequestDispatcher("index.jsp").forward(request, response);</b></li>
+        </ul>
+      </li>
+      <li>
+        <h4>CustomerSearchServlet.java</h4>
+        <ul>
+          <li>Handle <b>cid</b> (customer id) from <b>index.jsp</b> via <b>getParameter("cid")</b></li>
+          <li>Check if <b>cid</b> is null or not.</li>
+          <li>Parse <b>cidStr</b> to int via <b>Integer.parseInt(cidStr);</b></li>
+          <li>Handle <b>msg</b> if customer with this <b>cid</b> does not exist!</li>
+          <li>Dont't forget to <b>getServletContext().getRequestDispatcher("/CustomerForm.jsp").forward(request, response);</b> to edit this customer in next step.</li>
+        </ul>
+      </li>
+      <li>
+        <h4>UpdateCustomerServlet.java</h4>
+        <ul>
+          <li>Handle <b>customerId</b> from <b>customer_form.jsp</b></li>
+          <li>Check if <b>customerId</b> is null or not.</li>
+          <li>Use setters to set new value for this customer.</li>
+          <li>Use method <b>update(false)</b> from <b>Customer</b> class to update this customer.</li>
+          <li>Don't forget to <b>getServletContext().getRequestDispatcher("/CustomerList?searchKey=" + name).forward(request, response);</b></li>
+
+        </ul>
+      </li>
+      <li>
+        <h4>NewCustomerServlet.java</h4>
+        <ul>
+          <li>Just get the <b>newCustomerId</b> from <b>(1 + Customer.getLastCustomerId()) + "";</b></li>
+          <li>Set attribute for <b>newCustomerId</b></li>
+          <li>Don't forget to <b>getServletContext().getRequestDispatcher("/NewCustomer.jsp").forward(request, response);</b></li>
+        </ul>
+      </li>
+    </ol>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+      $("#fields-data").hide()
+      $("#fields-toggle").click(function() {
+        $("#fields-data").toggle()
+      })
+      $("#methods-data").hide()
+      $("#methods-toggle").click(function() {
+        $("#methods-data").toggle()
+      })
+    </script>
+  </body>
+</html>
