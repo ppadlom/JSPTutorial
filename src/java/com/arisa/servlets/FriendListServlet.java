@@ -4,8 +4,12 @@
  * and open the template in the editor.
  */
 
+package com.arisa.servlets;
+
+import com.arisa.models.Friend;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author user
  */
-public class ViewServlet extends HttpServlet {
+public class FriendListServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,48 +32,10 @@ public class ViewServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String dayAttribute = (String) request.getAttribute("day");
-        if (dayAttribute != null) {
-            System.out.println(dayAttribute);
-        }
-
-        // ?day=0 << day is a parameter (URL param)
-        //System.out.println(request.getParameter("day"));
-        String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        int day = 0;
-        try {
-            day = Integer.parseInt(request.getParameter("day"));
-            /*
-            switch (day) {
-                case 0:
-                    request.setAttribute("day", "Monday");
-                    break;
-                case 1:
-                    request.setAttribute("day", "Tuesday");
-                    break;
-                case 2:
-                    request.setAttribute("day", "Wednesday");
-                    break;
-                case 3:
-                    request.setAttribute("day", "Thursday");
-                    break;
-                case 4:
-                    request.setAttribute("day", "Friday");
-                    break;
-                case 5:
-                    request.setAttribute("day", "Saturday");
-                    break;
-                 case 6:
-                    request.setAttribute("day", "Sunday");
-                    break;
-            }*/
-            request.setAttribute("day", days[day]);
-        } catch (NumberFormatException e) {
-            System.out.println(e);
-        }
-
+        List<Friend> friends = Friend.find("");
+        request.setAttribute("friends", friends);
+        getServletContext().getRequestDispatcher("/friend_list.jsp").forward(request, response);
         
-        getServletContext().getRequestDispatcher("/view.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

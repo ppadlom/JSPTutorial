@@ -13,15 +13,16 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <h3> <a href="/FriendList">go go go</a> </h3>
         <h4>Days</h4>
         <ol>
-            <li><a href="view?day=0">Monday</a></li>
-            <li><a href="view?day=1">Tuesday</a></li>
-            <li><a href="view?day=2">Wednesday</a></li>
-            <li><a href="view?day=3">Thursday</a></li>
-            <li><a href="view?day=4">Friday</a></li>
-            <li><a href="view?day=5">Saturday</a></li>
-            <li><a href="view?day=6">Sunday</a></li>
+            <li><a href="/view?day=0">Monday</a></li>
+            <li><a href="/view?day=1">Tuesday</a></li>
+            <li><a href="/view?day=2">Wednesday</a></li>
+            <li><a href="/view?day=3">Thursday</a></li>
+            <li><a href="/view?day=4">Friday</a></li>
+            <li><a href="/view?day=5">Saturday</a></li>
+            <li><a href="/view?day=6">Sunday</a></li>
         </ol>
     </body>
 </html>
