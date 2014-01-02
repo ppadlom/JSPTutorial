@@ -29,9 +29,13 @@
   <body>
     <div class="big">Eat Krispy Cream Saturday di</div>
     <h1>TODO List for Padlom from lecturer's example</h1>
+    <h3>Create project</h3>
+    <ol>
+      <li>Create new project with <b>context path</b> = "/"</li>
+    </ol>
     <h3>Model</h3>
     <ol>
-      <li>Create <b>DB_URL</b>, <b>DB_USER</b>, <b>DB_PASSWORD</b> constants to help you connect with database.</li>
+      <li>Create <b>private static final</b> {<b>DB_URL</b>, <b>DB_USER</b>, <b>DB_PASSWORD</b>} constants to help you connect with database.</li>
       <li>Create <b>Customer class</b></li>
       <p><div id="fields-toggle">With following fields...</div>
         <ul id="fields-data">
@@ -51,15 +55,16 @@
         <br />
         <div id="methods-toggle">And these methods...</div>
         <ul id="methods-data">
-          <li><b>find(String searchKey)</b> - returns List&lt;Customer&gt;</li>
-          <li><b>findById(int id)</b> - returns List&lt;Customer&gt;</li>
+          <li><b>find(String searchKey)</b> - returns <b>List&lt;Customer&gt;</b></li>
+          <li><b>findById(int id)</b> - returns <b>List&lt;Customer&gt;</b></li>
           <li><b>getters and setters</b> from above fields</li>
-          <li><b>save(boolean isNewCustomer)</b> - used for create or update <b>Customer</b> use <b>isNewCustomer</b> as a flag</li>
-          <li><b>toObject(ResultSet rs, Customer tmp)</b> - convert <b>ResultSet</b> type to <b>Customer</b> type</li>
+          <li><b>getLastCustomerId()</b> returns last customer ID used to create new customer</li>
+          <li><b>save(boolean isNewCustomer)</b> - used for create or update <b>Customer</b> use <b>isNewCustomer</b> from <b>update(isNewCustomer)</b> as a flag</li>
+          <li><b>createCustomer(ResultSet rs)</b> - convert <b>ResultSet</b> type to <b>Customer</b> type and return <b>Customer</b> object</li>
           <li><b>toString()</b></li>
-          <li><b>update(boolean isNewCustomer)</b> - make changes to the specified <b>Customer</b></li>
         </ul>
       </p>
+      <li>Every time you finish a method in <b>Customer</b> class, you should write test (<b>Main.java</b>) to check if your work is correct?</li>
 
     </ol>
 
