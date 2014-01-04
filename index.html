@@ -37,7 +37,7 @@
     <ol>
       <li>Create <b>private static final</b> {<b>DB_URL</b>, <b>DB_USER</b>, <b>DB_PASSWORD</b>} constants to help you connect with database.</li>
       <li>Create <b>Customer class</b></li>
-      <p><div id="fields-toggle">With following fields...</div>
+      <p><div id="fields-toggle">With following fields</div>
         <ul id="fields-data">
           <li><b>addressLine1</b></li>
           <li><b>addressLine2</b></li>
@@ -51,17 +51,18 @@
           <li><b>phone</b></li>
           <li><b>state</b></li>
           <li><b>zip</b></li>
+          <li>and their <b>getters and setters</b></li>
         </ul>
         <br />
-        <div id="methods-toggle">And these methods...</div>
+        <div id="methods-toggle">And these methods (in order)</div>
         <ul id="methods-data">
+          <li><b>toString()</b></li>
+          <li><b>createCustomer(ResultSet rs)</b> - transforms <b>ResultSet</b> type to <b>Customer</b> type</li>
+          <li><b>createConnection() throws SQLException</b> - helper method that get connection from DriverManager</li>
           <li><b>find(String searchKey)</b> - returns <b>List&lt;Customer&gt;</b></li>
           <li><b>findById(int id)</b> - returns <b>List&lt;Customer&gt;</b></li>
-          <li><b>getters and setters</b> from above fields</li>
-          <li><b>getLastCustomerId()</b> returns last customer ID used to create new customer</li>
-          <li><b>save(boolean isNewCustomer)</b> - used for create or update <b>Customer</b> use <b>isNewCustomer</b> from <b>update(isNewCustomer)</b> as a flag</li>
-          <li><b>createCustomer(ResultSet rs)</b> - convert <b>ResultSet</b> type to <b>Customer</b> type and return <b>Customer</b> object</li>
-          <li><b>toString()</b></li>
+          <li><b>getLastCustomerId()</b> returns last customer ID used to create new <b>Customer</b></li>
+          <li><b>save(boolean isNewCustomer)</b> - used for create new <b>Customer</b> or update existing <b>Customer</b> use <b>isNewCustomer</b> as a flag</li>
         </ul>
       </p>
       <li>Every time you finish a method in <b>Customer</b> class, you should write test (<b>Main.java</b>) to check if your work is correct?</li>
@@ -70,7 +71,7 @@
 
     <h3>View</h3>
     <ol>
-      <li><b>index.jsp</b> - create some form to enter a <b>search key</b> then display list of customers when form is submitted and link to <b>new_customer.jsp</b> </li>
+      <li><b>index.jsp</b> - create some form to enter a <b>searchKey</b> then display list of customers when form is submitted and link to <b>new_customer.jsp</b> </li>
       <li><b>new_customer.jsp</b> - create form to enter new customer info.</li>
       <li><b>customer_form.jsp</b> - create form similar to <b>new_customer.jsp</b> (for view the specific customer)</li>
     </ol>
@@ -79,7 +80,7 @@
     <ol>
       <li><h4>General</h4></li>
       <ul>
-        <li>Don't forget to <b>getServletContext().getRequestDispatcher("index.jsp").forward(request, response);</b></li>
+        <li>Don't forget to <b>getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);</b></li>
         <li>Use <b>doGet()</b> for display data.</li>
         <li>Use <b>doPost()</b> for create, update, or search data.</li>
       </ul>
